@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-neon-green">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova - Cyberpunk AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="/static/style.css" rel="stylesheet" />
+  <style>
+    body, html {
+      font-family: 'Share Tech Mono', monospace;
+      background: #000;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      /* Cyberpunk 2077 inspired neon grid and glow */
+      background:
+        repeating-linear-gradient(120deg, #00fff733 0px, #00fff733 2px, transparent 2px, transparent 40px),
+        repeating-linear-gradient(-120deg, #ff00ff33 0px, #ff00ff33 2px, transparent 2px, transparent 40px),
+        radial-gradient(circle at 80% 20%, #ff00ff22 0%, transparent 70%),
+        radial-gradient(circle at 20% 80%, #39ff1444 0%, transparent 70%),
+        linear-gradient(90deg, #111 0%, #222 100%);
+      animation: scanlines 2s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scanlines {
+      0% { background-position: 0 0, 0 0, 80% 20%, 20% 80%, 0 0; }
+      100% { background-position: 40px 40px, 40px 40px, 80% 20%, 20% 80%, 0 0; }
+    }
+    .cyberpunk-border {
+      border: 3px solid #00fff7;
+      border-radius: 18px 2px 18px 2px;
+      box-shadow: 0 0 32px #00fff7, 0 0 64px #ff00ff44 inset, 0 0 16px #ffea00;
+      background: linear-gradient(90deg, #111 80%, #00fff711 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cyberpunk-border::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 18px 2px 18px 2px;
+      pointer-events: none;
+      box-shadow: 0 0 32px #ffea0088 inset, 0 0 16px #ff00ff44;
+      opacity: 0.3;
+    }
+    .cyberpunk-header {
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      text-shadow: 0 0 24px #ffea00, 0 0 48px #00fff7, 0 0 16px #ff00ff;
+      animation: glitch 1.5s infinite linear alternate-reverse;
+      background: linear-gradient(90deg, #ffea00 30%, #00fff7 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00fff7, 0 0 24px #ffea00; }
+      20% { text-shadow: -2px 0 #ff00ff, 2px 0 #00fff7, 0 0 48px #ffea00; }
+      40% { text-shadow: 2px 2px #ff00ff, -2px -2px #00fff7, 0 0 16px #ffea00; }
+      60% { text-shadow: -2px -2px #ff00ff, 2px 2px #00fff7, 0 0 32px #ffea00; }
+      80% { text-shadow: 2px 0 #ff00ff, -2px 0 #00fff7, 0 0 24px #ffea00; }
+      100% { text-shadow: 0 0 24px #ff00ff, 0 0 48px #00fff7, 0 0 16px #ffea00; }
+    }
+    .cyberpunk-footer {
+      text-shadow: 0 0 8px #00fff7, 0 0 16px #ffea00;
+      letter-spacing: 0.2em;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .cyberpunk-btn {
+      background: linear-gradient(90deg, #ffea00 0%, #00fff7 100%);
+      color: #111;
+      text-shadow: 0 0 4px #fff;
+      box-shadow: 0 0 8px #ffea00, 0 0 16px #00fff7;
+      border: none;
+      font-family: inherit;
+      font-weight: bold;
+      transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+    }
+    .cyberpunk-btn:hover {
+      background: linear-gradient(90deg, #ff00ff 0%, #00fff7 100%);
+      color: #fff;
+      box-shadow: 0 0 24px #ff00ff, 0 0 32px #00fff7;
+    }
+    .cyberpunk-input {
+      background: rgba(0,0,0,0.85);
+      color: #ffea00;
+      border: 2px solid #00fff7;
+      box-shadow: 0 0 8px #00fff7;
+      font-family: inherit;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .cyberpunk-input:focus {
+      border: 2px solid #ff00ff;
+      box-shadow: 0 0 16px #ff00ff;
+      outline: none;
+    }
+    /* Make UI extra wide and immersive */
+    .max-w-7xl {
+      max-width: 96vw !important;
+    }
+    @media (max-width: 1280px) {
+      .max-w-7xl {
+        max-width: 100vw !important;
+      }
+    }
+    @media (max-width: 1024px) {
+      .max-w-7xl {
+        max-width: 100vw !important;
+      }
+    }
+    @media (max-width: 640px) {
+      #chatbox {
+        height: 40vh !important;
+        padding: 1rem !important;
+        font-size: 0.9rem !important;
+      }
+      .text-6xl {
+        font-size: 2rem !important;
+      }
+      .max-w-7xl {
+        max-width: 100% !important;
+      }
+      #chat-form input, #chat-form button {
+        font-size: 1rem !important;
+        padding: 0.5rem !important;
+      }
+      main {
+        padding: 1rem !important;
+      }
+    }
+    /* Cyberpunk 2077 HUD accent */
+    .hud-bar {
+      height: 8px;
+      width: 100%;
+      background: linear-gradient(90deg, #ffea00 0%, #00fff7 50%, #ff00ff 100%);
+      box-shadow: 0 0 24px #ffea00, 0 0 32px #00fff7, 0 0 16px #ff00ff;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      opacity: 0.85;
+      animation: hudbar-flicker 2s infinite alternate;
+    }
+    @keyframes hudbar-flicker {
+      0% { opacity: 0.85; }
+      50% { opacity: 0.6; }
+      100% { opacity: 0.85; }
+    }
+  </style>
+</head>
+<body class="flex flex-col h-screen justify-between">
+  <header class="text-center cyberpunk-header text-6xl mt-6 mb-2 tracking-widest select-none">NOVA</header>
+  <div class="hud-bar"></div>
+  <main class="flex flex-col items-center justify-center px-2 py-4 flex-1 w-full">
+    <div id="chatbox" class="w-full max-w-7xl cyberpunk-border p-10 rounded-lg shadow-lg overflow-y-auto h-[70vh] text-base font-mono mb-4"></div>
+    <form id="chat-form" class="mt-2 w-full max-w-7xl flex gap-3 flex-col sm:flex-row">
+      <input type="text" id="message" class="flex-1 cyberpunk-input p-4 rounded text-lg" placeholder="Type your message..." required autocomplete="off" />
+      <button type="submit" class="cyberpunk-btn px-10 py-4 rounded text-lg">Send</button>
+    </form>
+  </main>
+  <div class="hud-bar"></div>
+  <footer class="text-center text-sm cyberpunk-footer mb-3">
+    <span class="text-[#ffea00]">© 2077 Nova Systems</span><br>
+    <span class="text-[#00fff7]">Developed by Alan Cyril Sunny</span>
+  </footer>
+  <script>
+    // AI knows the creator's name and its own name/version
+    const CREATOR_NAME = "Alan Cyril Sunny";
+    const AI_NAME = "Nova.vX1.9.4.r5";
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("message");
+    const chatbox = document.getElementById("chatbox");
+
+    // Simple keyword-based creator and AI name/version response
+    function checkCreatorQuestion(msg) {
+      const triggers = [
+        "who created you", "who is your creator", "who made you", "your developer", "your author", "who built you"
+      ];
+      msg = msg.toLowerCase();
+      return triggers.some(trigger => msg.includes(trigger));
+    }
+    function checkNameQuestion(msg) {
+      const triggers = [
+        "what is your name", "who are you", "your name", "identify yourself", "version"
+      ];
+      msg = msg.toLowerCase();
+      return triggers.some(trigger => msg.includes(trigger));
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      chatbox.innerHTML += `<div class="mb-2"><strong style="color:#ff00ff;text-shadow:0 0 8px #ff00ff;">You:</strong> <span style="color:#ffea00">${msg}</span></div>`;
+      input.value = "";
+
+      // If user asks about the creator, answer directly
+      if (checkCreatorQuestion(msg)) {
+        chatbox.innerHTML += `<div class="mb-4"><strong style="color:#00fff7;text-shadow:0 0 8px #00fff7;">${AI_NAME}:</strong> <span style="color:#fff">My creator is <span style="color:#ffea00;font-weight:bold;">${CREATOR_NAME}</span>. He gave me my cyberpunk soul.</span></div>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+        return;
+      }
+
+      // If user asks about the AI's name or version
+      if (checkNameQuestion(msg)) {
+        chatbox.innerHTML += `<div class="mb-4"><strong style="color:#00fff7;text-shadow:0 0 8px #00fff7;">${AI_NAME}:</strong> <span style="color:#fff">My name is <span style="color:#ffea00;font-weight:bold;">${AI_NAME}</span>, the cyberpunk AI assistant.</span></div>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+        return;
+      }
+
+      const response = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg })
+      });
+
+      const data = await response.json();
+      chatbox.innerHTML += `<div class="mb-4"><strong style="color:#00fff7;text-shadow:0 0 8px #00fff7;">${AI_NAME}:</strong> <span style="color:#fff">${data.response || "ERROR"}</span></div>`;
+      chatbox.scrollTop = chatbox.scrollHeight;
+    });
+  </script>
+</body>
+</html>

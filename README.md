@@ -3,14 +3,14 @@
 ![Flask](https://img.shields.io/badge/Backend-Flask-000000?logo=flask)
 ![Python](https://img.shields.io/badge/Language-Python-blue)
 ![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38bdf8)
-![Llama 3](https://img.shields.io/badge/AI-Llama%203-yellow)
+![Llama 3.0 70B](https://img.shields.io/badge/AI-Llama%203.0%2070B-yellow)
 ![Cyberpunk UI](https://img.shields.io/badge/UI-Cyberpunk%20Theme-purple)
 
 > If you enjoy Nova, please consider ⭐ [starring the repository](https://github.com/your-repo/nova-chatbot)!
 
 ---
 
-**Nova** is a glitchcore cyberpunk AI chatbot, inspired by the neon-lit worlds of *Neuromancer* and *Cyberpunk 2077*. Nova delivers snappy, edgy, and tech-laced responses in a visually immersive web UI, powered by the Llama 3 API.
+**Nova** is a glitchcore cyberpunk AI chatbot, inspired by the neon-lit worlds of *Neuromancer* and *Cyberpunk 2077*. Nova delivers snappy, edgy, and tech-laced responses in a visually immersive web UI, powered by the Llama 3.0 70B API.
 
 **Version:** `Nova.vX1.9.4.r5`
 
@@ -23,9 +23,10 @@
 ## ✨ Features
 
 - **Cyberpunk UI:** Neon grid, glitch effects, and immersive styling.
-- **LLM-powered:** Uses the Llama 3 model for chat responses.
+- **LLM-powered:** Uses the Llama 3.0 70B model for chat responses.
 - **Custom Persona:** Nova speaks in a unique, cyberpunk-inspired voice and knows her name/version (`Nova.vX1.9.4.r5`) and creator (`Alan Cyril Sunny`).
 - **Responsive Design:** Works seamlessly on desktop and mobile.
+- **GPU Optimized:** Like all of my previous releases, this is also GPU optimized—especially for NVIDIA GPUs. It will work perfectly on Intel and AMD GPUs too.
 
 ---
 
@@ -33,7 +34,7 @@
 
 - **Backend:** Python, Flask
 - **Frontend:** HTML, Tailwind CSS, custom CSS (cyberpunk theme)
-- **AI Integration:** Llama 3 API
+- **AI Integration:** Llama 3.0 70B API
 - **Other:** Vanilla JavaScript (chat logic)
 
 ---
@@ -52,7 +53,7 @@
     ```
 
 3. **API Key Configuration:**
-    - Copy `.env.example` to `.env` and add your Llama 3 API key, or edit `.env` directly.
+    - Copy `.env.example` to `.env` and add your Llama 3.0 70B API key, or edit `.env` directly.
 
 4. **Run the App:**
     ```bash
@@ -87,23 +88,18 @@ nova-chatbot/
 
 ## Notes
 
-- **API Key Security:** Never expose your Llama 3 API key in public repositories.
+- **API Key Security:** Never expose your Llama 3.0 70B API key in public repositories.
 - **Customization:** Change Nova’s persona via the `system_prompt` in `app.py`. Tweak the UI in `static/style.css` and `templates/index.html`.
-- **LLM API:** Powered by Llama 3.
+- **LLM API:** Powered by Llama 3.0 70B.
+- **GPU Optimization:** Optimized for NVIDIA GPUs, but fully compatible with Intel and AMD GPUs as well.
 
 ---
 
 ## Troubleshooting
 
-- **API Key Errors:** Ensure your Llama 3 API key is set correctly in `.env`.
+- **API Key Errors:** Ensure your Llama 3.0 70B API key is set correctly in `.env`.
 - **UI Issues:** Check browser compatibility and ensure all static files are loaded.
 - **Dependency Problems:** Reinstall dependencies with `pip install -r requirements.txt`.
-
----
-
-**<prompt>  
-uses llama3  
-</prompt>**
 
 ---
 
@@ -113,3 +109,9 @@ Inspired by the cyberpunk aesthetic and the future of AI chat.
 ---
 
 © 2077 Nova Systems
+
+---
+
+<prompt>
+uses Llama 3.0 70B
+</prompt>
